@@ -1,9 +1,10 @@
 const AppError = require('../utils/appError');
 const APIFeatures = require('../utils/apiFeatures');
 
-exports.deleteOne = Model => async (req, res, next) => {
+const deleteOne = async (req, res, next) => {
     try {
-        const doc = await Model.findByIdAndDelete(req.params.id);
+        //const doc = await findByIdAndDelete(req.params.id);
+        const doc = null;
 
         if (!doc) {
             return next(new AppError(404, 'fail', 'No document found with that id'), req, res, next);
@@ -18,12 +19,13 @@ exports.deleteOne = Model => async (req, res, next) => {
     }
 };
 
-exports.updateOne = Model => async (req, res, next) => {
+exports.updateOne = async (req, res, next) => {
     try {
-        const doc = await Model.findByIdAndUpdate(req.params.id, req.body, {
-            new: true,
-            runValidators: true
-        });
+        // const doc = await Model.findByIdAndUpdate(req.params.id, req.body, {
+        //     new: true,
+        //     runValidators: true
+        // });
+        const doc = null;
 
         if (!doc) {
             return next(new AppError(404, 'fail', 'No document found with that id'), req, res, next);
@@ -43,7 +45,8 @@ exports.updateOne = Model => async (req, res, next) => {
 
 exports.createOne = Model => async (req, res, next) => {
     try {
-        const doc = await Model.create(req.body);
+       // const doc = await Model.create(req.body);
+       const doc = null;
 
         res.status(201).json({
             status: 'success',
@@ -57,43 +60,6 @@ exports.createOne = Model => async (req, res, next) => {
     }
 };
 
-exports.getOne = Model => async (req, res, next) => {
-    try {
-        const doc = await Model.findById(req.params.id);
-
-        if (!doc) {
-            return next(new AppError(404, 'fail', 'No document found with that id'), req, res, next);
-        }
-
-        res.status(200).json({
-            status: 'success',
-            data: {
-                doc
-            }
-        });
-    } catch (error) {
-        next(error);
-    }
-};
-
-exports.getAll = Model => async (req, res, next) => {
-    try {
-        const features = new APIFeatures(Model.find(), req.query)
-            .sort()
-            .paginate();
-
-        const doc = await features.query;
-
-        res.status(200).json({
-            status: 'success',
-            results: doc.length,
-            data: {
-                data: doc
-            }
-        });
-
-    } catch (error) {
-        next(error);
-    }
-
-};
+module.exports = {
+    
+}
