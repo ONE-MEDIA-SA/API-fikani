@@ -5,11 +5,11 @@ dotenv.config({
 
 process.on('uncaughtException', err => {
     console.log('UNCAUGHT EXCEPTION!!! shutting down...');
-    console.log(err.stack, err.message);
+    console.log(err.name, err.message);
     process.exit(1);
 });
 
-const app = require('./app');
+const app = require('./src/app');
 
 // Connect the database
 

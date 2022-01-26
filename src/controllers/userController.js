@@ -1,19 +1,22 @@
 const User = require('../models/userModel');
 const base = require('./baseController');
-
+const AppError = require("../utils/appError");
 
 const getAllUsers = async (req, res, next) => {
     try {
         //const doc = await findByIdAndDelete(req.params.id);
-        const doc = null;
+        const doc = await base.getAllUsers();
+       
 
         if (!doc) {
-            return next(new AppError(404, 'fail', 'No document found with that id'), req, res, next);
+            return next(new AppError(404, 'fail', 'No document found'), req, res, next);
         }
 
+        console.log(doc)
+        res.status(200).send(doc)
         res.status(204).json({
             status: 'success',
-            data: []
+            data: doc
         });
     } catch (error) {
         next(error);
