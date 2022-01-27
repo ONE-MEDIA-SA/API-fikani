@@ -22,6 +22,9 @@ const User = database.define('user', {
     },
     password: {
         type: Sequelize.STRING
+    },
+    role: {
+        type: Sequelize.STRING
     }
     
 })

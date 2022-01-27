@@ -5,6 +5,7 @@
   "main": "app.js",
   "scripts": {
     "debug": "ndb server.js",
+    "test": "jest",
     "start": "nodemon server.js"
   },
   "author": "Agostinho Dos Santos",
@@ -27,5 +28,8 @@
     "sequelize": "^6.14.1",
     "validator": "^13.7.0",
     "xss-clean": "^0.1.1"
+  },
+  "devDependencies": {
+    "jest": "^27.4.7"
   }
 }

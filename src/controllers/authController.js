@@ -36,9 +36,6 @@ exports.login = async (req, res, next) => {
     })
 
 
-    console.log(user)
-
-  
     if (!user || !(await user.comparePassword(password, user.password))) {
       return next(
         new AppError(401, "fail", "Email or Password is wrong"),
@@ -48,7 +45,7 @@ exports.login = async (req, res, next) => {
       );
     }
 
-    // 3) All correct, send jwt to client
+    // All correct, send jwt to client
     const token = createToken(user.id);
 
     // Remove the password from the output
@@ -72,7 +69,6 @@ exports.signup = async (req, res, next) => {
       name: req.body.name,
       email: req.body.email,
       password: hashPassword(req.body.password),
-      passwordConfirm: req.body.passwordConfirm,
       role: req.body.role,
     });
 
