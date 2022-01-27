@@ -1,5 +1,9 @@
 const { Sequelize } = require("sequelize");
-require("dotenv").config();
+const dotenv = require('dotenv');
+dotenv.config({
+    path: './config.env'
+});
+
  
   const sequelize = process.env.ENV === "dev" ?
     new Sequelize({
