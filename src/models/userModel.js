@@ -2,7 +2,8 @@ const validator = require("validator");
 const bcrypt = require("bcryptjs");
 
 const Sequelize = require('sequelize');
-const database = require('../config/db.config')
+const database = require('../config/db.config');
+const { decryptPassword } = require("../utils/validator");
 
 const User = database.define('user', {
     id: {
@@ -24,5 +25,9 @@ const User = database.define('user', {
     }
     
 })
+
+User.prototype.comparePassword = function (password, user_password) {
+   return decryptPassword(password, user_password)
+}
 
 module.exports = User
