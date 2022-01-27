@@ -2,6 +2,7 @@ const { promisify } = require("util");
 const jwt = require("jsonwebtoken");
 const User = require("../models/userModel");
 const AppError = require("../utils/appError");
+const {hashPassword, decryptPassword} = require("../utils/validator")
 
 const createToken = id => {
   return jwt.sign(
@@ -32,9 +33,10 @@ exports.login = async (req, res, next) => {
     // 2) check if user exist and password is correct
     const user = await User.findOne({
       email,
-    }).select("+password");
+    })
 
-    if (!user || !(await user.correctPassword(password, user.password))) {
+
+    if (!user || !(await user.comparePassword(password, user.password))) {
       return next(
         new AppError(401, "fail", "Email or Password is wrong"),
         req,
@@ -43,7 +45,7 @@ exports.login = async (req, res, next) => {
       );
     }
 
-    // 3) All correct, send jwt to client
+    // All correct, send jwt to client
     const token = createToken(user.id);
 
     // Remove the password from the output
@@ -66,8 +68,7 @@ exports.signup = async (req, res, next) => {
     const user = await User.create({
       name: req.body.name,
       email: req.body.email,
-      password: req.body.password,
-      passwordConfirm: req.body.passwordConfirm,
+      password: hashPassword(req.body.password),
       role: req.body.role,
     });
 
