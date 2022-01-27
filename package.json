@@ -25,6 +25,8 @@
     "mongoose": "^5.7.7",
     "nodemon": "^2.0.15",
     "pg": "^8.7.1",
+    "promise-redis": "^0.0.5",
+    "redis": "^4.0.2",
     "sequelize": "^6.14.1",
     "validator": "^13.7.0",
     "xss-clean": "^0.1.1"

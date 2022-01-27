@@ -1,16 +1,11 @@
 const AppError = require('../utils/appError');
 const APIFeatures = require('../utils/apiFeatures');
-const axios = require('axios')
+const User = require('../models/userModel');
+
 
 async function getAllUsers() {
-  return await axios.get('https://jsonplaceholder.typicode.com/users')
-  .then(function (response) {
-      return response.data
-  })
-  .catch(function (error) {
-    return response
-  })
-  
+  const users = await User.scope('withoutPassword').findAll();
+  return users;
 }
 
 module.exports = {
