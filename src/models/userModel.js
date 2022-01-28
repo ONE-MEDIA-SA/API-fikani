@@ -1,5 +1,4 @@
 const validator = require("validator");
-const bcrypt = require("bcryptjs");
 
 const Sequelize = require('sequelize');
 const database = require('../config/db.config');

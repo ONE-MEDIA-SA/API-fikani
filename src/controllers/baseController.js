@@ -5,7 +5,6 @@ const client = require('../config/cache.config')
 
 async function getAllUsers() {
     var users = await client.get('users');
-
     if (!users) {
         users = await User.findAll();
         client.set('users', JSON.stringify(users), {
