@@ -1,12 +1,13 @@
 const AppError = require('../utils/appError');
 const APIFeatures = require('../utils/apiFeatures');
 const User = require('../models/userModel');
-const client = require('../config/cache.config')
+const client = require('../config/cache.config');
+const database = require('../config/db.config');
 
 async function getAllUsers() {
     var users = await client.get('users');
     if (!users) {
-        users = await User.findAll();
+        users = await User(database).findAll();
         client.set('users', JSON.stringify(users), {
             EX: 60 * 5, // cache for 5 minutes
             NX: true

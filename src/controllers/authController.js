@@ -2,7 +2,8 @@ const { promisify } = require("util");
 const jwt = require("jsonwebtoken");
 const User = require("../models/userModel");
 const AppError = require("../utils/appError");
-const {hashPassword, decryptPassword} = require("../utils/validator")
+const {hashPassword, decryptPassword} = require("../utils/validator");
+const database = require('../config/db.config');
 
 const createToken = id => {
   return jwt.sign(
@@ -31,12 +32,12 @@ exports.login = async (req, res, next) => {
     }
 
     // 2) check if user exist and password is correct
-    const user = await User.findOne({
+    const user = await User(database).findOne({
       email,
     })
 
 
-    if (!user || !(await user.comparePassword(password, user.password))) {
+    if (!user || !(await decryptPassword(password, user.password))) {
       return next(
         new AppError(401, "fail", "Email or Password is wrong"),
         req,
@@ -65,7 +66,7 @@ exports.login = async (req, res, next) => {
 
 exports.signup = async (req, res, next) => {
   try {
-    const user = await User.create({
+    const user = await User(database).create({
       name: req.body.name,
       email: req.body.email,
       password: hashPassword(req.body.password),
@@ -115,7 +116,7 @@ exports.protect = async (req, res, next) => {
     const decode = await promisify(jwt.verify)(token, process.env.JWT_SECRET);
 
     // 3) check if the user is exist (not deleted)
-    const user = await User.findById(decode.id);
+    const user = await User(database).findById(decode.id);
     if (!user) {
       return next(
         new AppError(401, "fail", "This user is no longer exist"),
