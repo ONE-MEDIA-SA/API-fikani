@@ -11,5 +11,36 @@ const Exhibitor = database.define('exhibitor', {
         allowNull: false,
         primaryKey: true
     },
-    na
+    name: {
+        type: Sequelize.STRING,
+        allowNull: false,
+    },
+    email: {
+        type: Sequelize.STRING,
+        allowNull: false,
+     },
+    password: { 
+        type: Sequelize.STRING,
+        allowNull: false
+    },
+    category: {
+        type: Sequelize.STRING,
+    },
+    website: {
+        type: Sequelize.STRING,
+    },
+    location: {
+        type: Sequelize.STRING,
+    },
+    profile_url: {
+        type: Sequelize.STRING,
+    },
+    phone: {
+        type: Sequelize.STRING,
+    },
+    about: {
+        type: Sequelize.STRING,
+    }
 })
+
+module.exports = Exhibitor;
