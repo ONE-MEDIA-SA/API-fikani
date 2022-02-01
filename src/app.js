@@ -40,16 +40,14 @@ app.use(xss());
 
 // Prevent parameter pollution
 app.use(hpp());
+
+// Check api-key
 app.use('*', (req, res, next) => {
     const api_key = req.headers['api-key'];
     if (!api_key || api_key !== '12345') { 
         const err = new AppError(404, 'fail', 'unauthorized authentication required');
         next(err, req, res, next);
-    } else  {
-        next()
-        console.log('authorized');
-    }
-
+    } 
 })
 
 // Routes
