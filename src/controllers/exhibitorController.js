@@ -4,6 +4,7 @@ const database = require('../config/db.config');
 
 
 exports.getAllExhibitors = async (req, res, next) => { 
+ 
     try {
         const exhibitors = await 
         Exhibitor(database).findAll();
@@ -17,6 +18,7 @@ exports.getAllExhibitors = async (req, res, next) => {
 }
 
 exports.setExhibitor = async (req, res, next) => { 
+    
     try {
         const myExhibitor = await 
         Exhibitor(database).create(req.body);

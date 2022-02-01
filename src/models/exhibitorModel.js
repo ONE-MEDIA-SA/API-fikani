@@ -35,7 +35,19 @@ const Exhibitor = (database) => {
         },
         about: {
             type: database.Sequelize.STRING,
-        }
+        },
+        facebook_link: {
+            type: database.Sequelize.STRING,
+        },
+        twitter_link: {
+            type: database.Sequelize.STRING,
+        },
+        instagram_link: {
+            type: database.Sequelize.STRING,
+        },
+        youtube_link: {
+            type: database.Sequelize.STRING,
+        },
     });
 }
 
