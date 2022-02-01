@@ -1,4 +1,4 @@
-const gallery = (database) => {
+const Gallery = (database) => {
     return database.define('gallery', { 
         id: {
             type: database.Sequelize.INTEGER,
@@ -17,3 +17,5 @@ const gallery = (database) => {
         }
     });
 }
+
+module.exports = Gallery;
