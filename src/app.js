@@ -8,6 +8,7 @@ const cors = require('cors');
 
 
 const userRoutes = require('./routes/userRoutes');
+const exhibitorRoutes = require('./routes/exhibitorRoutes');
 const globalErrHandler = require('./controllers/errorController');
 const AppError = require('./utils/appError');
 const app = express();
@@ -20,7 +21,7 @@ app.use(helmet());
 
 // Limit request from the same API 
 const limiter = rateLimit({
-    max: 150,
+    max: 150000,
     windowMs: 60 * 60 * 1000,
     message: 'Too Many Request from this IP, please try again in an hour'
 });
@@ -43,6 +44,7 @@ app.use(hpp());
 
 // Routes
 app.use('/api/v1/users', userRoutes);
+app.use('/api/v1/exhibitor', exhibitorRoutes);
 
 // handle undefined Routes
 app.use('*', (req, res, next) => {
