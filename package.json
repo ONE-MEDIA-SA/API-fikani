@@ -11,6 +11,7 @@
   "author": "Agostinho Dos Santos",
   "license": "ISC",
   "dependencies": {
+    "@google-cloud/storage": "^5.18.1",
     "axios": "^0.25.0",
     "bcryptjs": "^2.4.3",
     "bull": "^4.4.0",
