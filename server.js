@@ -12,6 +12,7 @@ process.on('uncaughtException', err => {
 const app = require('./src/app');
 
 // Connect the database
+const db = require('./config/db');
 
 // Start the server
 const port = process.env.PORT;

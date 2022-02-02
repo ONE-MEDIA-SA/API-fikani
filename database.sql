@@ -2,7 +2,7 @@ CREATE TYPE "products_status" AS ENUM (
   'out_of_stock',
   'in_stock',
   'running_low'
-);
+); 
 
 CREATE TABLE "users" (
   "id" SERIAL PRIMARY KEY,
