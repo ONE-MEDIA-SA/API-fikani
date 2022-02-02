@@ -5,6 +5,11 @@ const mongoSanitize = require('express-mongo-sanitize');
 const xss = require('xss-clean');
 const hpp = require('hpp');
 const cors = require('cors');
+const dotenv = require('dotenv');
+dotenv.config({
+    path: './config.env'
+});
+
 
 
 const userRoutes = require('./routes/userRoutes');
@@ -44,7 +49,7 @@ app.use(hpp());
 // Check api-key
 app.use('*', (req, res, next) => {
     const api_key = req.headers['api-key'];
-    if (!api_key || api_key !== '12345') { 
+    if (!api_key || api_key !== process.env.API_KEY) { 
         const err = new AppError(404, 'fail', 'unauthorized authentication required');
         next(err, req, res, next);
     } 
