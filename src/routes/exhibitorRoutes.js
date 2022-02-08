@@ -10,7 +10,12 @@ router
     .route('/')
     .get(exhibitorController.getAllExhibitors)
     .post(exhibitorController.setExhibitor);
-    
+  
+router
+    .route('/:id/gallery')
+    .post(exhibitorController.setGallery);
+      
+
 //router.get('/:id', exhibitorController.getExhibitor);
     
 // Protect all routes after this middleware
