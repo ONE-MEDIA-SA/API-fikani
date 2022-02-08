@@ -14,3 +14,11 @@ exports.uploadFile = async (path, filename) => {
 
     return storage[0].metadata.mediaLink;
 }
+
+exports.uploadMultipleFiles = async (paths, filenames) => { 
+    const promises = paths.map(async (path, index) => {
+        return this.uploadFile(path, filenames[index]);
+    });
+
+    return Promise.all(promises);
+}
