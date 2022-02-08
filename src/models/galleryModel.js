@@ -9,7 +9,7 @@ const Gallery = (database) => {
         exhibitor_id: { 
             type: database.Sequelize.INTEGER,
         },
-        image_url: {
+        url: {
             type: database.Sequelize.STRING,
         },
         mimetype: {
