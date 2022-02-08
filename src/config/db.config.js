@@ -39,11 +39,11 @@ dotenv.config({
       console.error("Unable to connect to the database:", error);
     });
   
-  sequelize.sync({ force: true }).then(() => {
-    console.log("Drop and create")
-  }).catch(error => {
-    console.error("Unable to force: ", error)
-  });
+  // sequelize.sync({ force: true }).then(() => {
+  //   console.log("Drop and create")
+  // }).catch(error => {
+  //   console.error("Unable to force: ", error)
+  // });
 
   process.on('SIGINT', async () => {
     await sequelize.close(() => {

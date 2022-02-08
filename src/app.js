@@ -53,6 +53,7 @@ app.use('*', (req, res, next) => {
         const err = new AppError(404, 'fail', 'unauthorized authentication required');
         next(err, req, res, next);
     } 
+    next();
 })
 
 // Routes

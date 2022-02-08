@@ -19,7 +19,7 @@ exports.getAllExhibitors = async (req, res, next) => {
 }
 
 exports.setExhibitor = async (req, res, next) => { 
-    
+    console.log(req.body);
     try {
         const myExhibitor = await 
         Exhibitor(database).create(req.body);
@@ -30,7 +30,9 @@ exports.setExhibitor = async (req, res, next) => {
             data: myExhibitor
         });
     } catch (err) {
-        next(err);
+        const myError = new AppError(404, 'fail', err);
+        next(myError, req, res, next);
+        console.log(err);
     }
 }
 
