@@ -11,7 +11,6 @@ dotenv.config({
 });
 
 
-
 const userRoutes = require('./routes/userRoutes');
 const exhibitorRoutes = require('./routes/exhibitorRoutes');
 const globalErrHandler = require('./controllers/errorController');
