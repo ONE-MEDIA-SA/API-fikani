@@ -1,5 +1,6 @@
 const {defaultBucket} = require('../config/fb.config');
 const { v4: uuidv4 } = require('uuid');
+const removeFile = require('./fsUtil');
 
 exports.uploadFile = async (path, filename) => {
 
@@ -11,7 +12,7 @@ exports.uploadFile = async (path, filename) => {
             firebaseStorageDownloadTokens: uuidv4(),
         }
     });
-
+    removeFile(path);
     return storage[0].metadata.mediaLink;
 }
 
