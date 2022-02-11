@@ -21,6 +21,9 @@ const User = (database) => {
         password: {
             type: Sequelize.STRING
         },
+        status: {
+            type: Sequelize.STRING
+        },
         role: {
             type: Sequelize.STRING
         }
