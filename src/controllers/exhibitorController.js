@@ -2,6 +2,8 @@ const Exhibitor = require('../models/exhibitorModel');
 const AppError = require('../utils/appError');
 const database = require('../config/db.config');
 const {uploadFile, uploadMultipleFiles} = require('../utils/upload');
+const path = require('path')
+
 
 
 exports.getAllExhibitors = async (req, res, next) => { 
@@ -19,7 +21,7 @@ exports.getAllExhibitors = async (req, res, next) => {
 }
 
 exports.setExhibitor = async (req, res, next) => { 
-    console.log(req.body);
+
     try {
         const myExhibitor = await 
         Exhibitor(database).create(req.body);
@@ -40,10 +42,15 @@ exports.getExhibitor = async (req, res, next) => {
 
 }
 
-exports.setGallery = (req, res, next) => {
+exports.setGallery = async(req, res, next) => {
+    const paths = []
+    const names = []
     req.files.forEach(file => { 
-      req.body.images.push(file.filename);
+      paths.push(path.join(__dirname , "../../uploads/"+file.filename))
+      names.push(file.filename)
     });
-    console.log(req.body);
-    res.send(req.body);
+
+    const urls = await uploadMultipleFiles(paths, names);
+
+    res.status(201).send(urls);
 }
