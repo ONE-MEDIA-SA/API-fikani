@@ -11,7 +11,6 @@ dotenv.config({
 });
 
 
-
 const userRoutes = require('./routes/userRoutes');
 const exhibitorRoutes = require('./routes/exhibitorRoutes');
 const globalErrHandler = require('./controllers/errorController');
@@ -53,6 +52,7 @@ app.use('*', (req, res, next) => {
         const err = new AppError(404, 'fail', 'unauthorized authentication required');
         next(err, req, res, next);
     } 
+    next();
 })
 
 // Routes
