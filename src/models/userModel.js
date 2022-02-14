@@ -3,7 +3,7 @@ const {decryptPassword} = require("../utils/validator");
 const User = (database) => {
     let Sequelize = database.Sequelize;
 
-    return database.define('user', {
+    return database.define('users', {
         id: {
             type: Sequelize.INTEGER,
             autoIncrement: true,
@@ -19,9 +19,6 @@ const User = (database) => {
             allowNull: false
         },
         password: {
-            type: Sequelize.STRING
-        },
-        status: {
             type: Sequelize.STRING
         },
         role: {

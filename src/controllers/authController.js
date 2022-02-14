@@ -4,6 +4,8 @@ const User = require("../models/userModel");
 const AppError = require("../utils/appError");
 const {hashPassword, decryptPassword} = require("../utils/validator");
 const database = require('../config/db.config');
+const emailService = require('../jobs/EmailService')
+const {confirmEmail} = require('../utils/emailBuilder')
 
 const createToken = id => {
   return jwt.sign(
@@ -65,6 +67,10 @@ exports.login = async (req, res, next) => {
 };
 
 exports.signup = async (req, res, next) => {
+ 
+  emailService(req.body.email,  confirmEmail('fika'), 'Confirm Your Email Address')
+  return res.status(201).send({message: "message"})
+  
   try {
     const user = await User(database).create({
       name: req.body.name,
