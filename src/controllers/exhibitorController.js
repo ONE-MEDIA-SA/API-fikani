@@ -1,7 +1,6 @@
 const Exhibitor = require('../models/exhibitorModel');
 const Gallery = require('../models/galleryModel')
 const AppError = require('../utils/appError');
-const database = require('../config/db.config');
 const {uploadFile, uploadMultipleFiles} = require('../utils/upload');
 const path = require('path')
 
@@ -11,7 +10,7 @@ exports.getAllExhibitors = async (req, res, next) => {
  
     try {
         const exhibitors = await 
-        Exhibitor(database).findAll();
+        Exhibitor.findAll();
         res.status(200).json({
             status: 'success',
             data: exhibitors
@@ -29,7 +28,7 @@ exports.setExhibitor = async (req, res, next) => {
     try {
 
         const myExhibitor = await 
-        Exhibitor(database).create(req.body);
+        Exhibitor.create(req.body);
         myExhibitor.password = undefined;
 
         res.status(201).json({
@@ -59,7 +58,7 @@ exports.setGallery = async(req, res, next) => {
 
     const urls = await uploadMultipleFiles(paths, names);
 
-   const returnGallery = await Gallery(database).create({
+   const returnGallery = await Gallery.create({
         id: 0,
         exhibitor_id: id,
         url: urls[0],

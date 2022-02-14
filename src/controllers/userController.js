@@ -1,7 +1,6 @@
 const User = require('../models/userModel');
 const base = require('./baseController');
 const AppError = require("../utils/appError");
-const database = require('../config/db.config');
 
 const getAllUsers = async (req, res, next) => {
     try {

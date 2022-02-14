@@ -1,4 +1,3 @@
-const database = require('../config/db.config');
 const Meeting = require('../models/meetingModel');
 const AppError = require('../utils/appError');
 
@@ -22,7 +21,7 @@ const getAllExhibitorMeeting = async (req, res, next) => {
     const exhibitor_id = req.body.exhibitor_id
 
     try {
-        const exhibitors = await Meeting(database).findAll({ 
+        const exhibitors = await Meeting.findAll({ 
             where: {
                 id_exhibitor: exhibitor_id
             }
